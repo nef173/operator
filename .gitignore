@@ -1,0 +1,32 @@
+# Operator app — root ignore (covers both api/ and web/ for the GitHub push).
+
+# Python
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# Secrets + local data (NEVER commit)
+**/.env
+**/.env.local
+**/.env.*.local
+api/data/
+api/snapshots/
+*.db
+*.db-wal
+*.db-shm
+
+# Node / Next
+web/node_modules/
+web/.next/
+web/.next */
+web/out/
+web/build/
+web/.vercel/
+*.tsbuildinfo
+
+# OS / editor
+.DS_Store
+*.log
+
+# local prod data-volume backups — never track (blob bloat)
+_prod-backups/

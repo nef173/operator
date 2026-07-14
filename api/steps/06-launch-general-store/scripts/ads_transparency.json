@@ -1,0 +1,440 @@
+{
+  "updated": "2026-06-27T09:02:22Z",
+  "region": "anywhere",
+  "max_pages": 5,
+  "source": "google_ads_transparency_center",
+  "stores": {
+    "arvilaro.com": {
+      "domain": "arvilaro.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "shogue.com": {
+      "domain": "shogue.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "ozerty-usa.com": {
+      "domain": "ozerty-usa.com",
+      "google_ads_count": 10,
+      "capped": false,
+      "by_format": {
+        "image": 7,
+        "video": 2,
+        "text": 1,
+        "other": 0
+      },
+      "shopping_ads": 7,
+      "video_ads": 2,
+      "text_ads": 1,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "luvilea.com": {
+      "domain": "luvilea.com",
+      "google_ads_count": 9,
+      "capped": false,
+      "by_format": {
+        "image": 9,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 9,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:05Z",
+      "error": null
+    },
+    "rowgins.com": {
+      "domain": "rowgins.com",
+      "google_ads_count": 1,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 1,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 1,
+      "other_ads": 0,
+      "last_shown": "2026-04-09",
+      "checked_at": "2026-06-27T08:49:05Z",
+      "error": null
+    },
+    "shop-odessa.co": {
+      "domain": "shop-odessa.co",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:05Z",
+      "error": null
+    },
+    "abcsecretsavings.com": {
+      "domain": "abcsecretsavings.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:05Z",
+      "error": null
+    },
+    "feanatic.com": {
+      "domain": "feanatic.com",
+      "google_ads_count": 100,
+      "capped": false,
+      "by_format": {
+        "image": 87,
+        "video": 5,
+        "text": 8,
+        "other": 0
+      },
+      "shopping_ads": 87,
+      "video_ads": 5,
+      "text_ads": 8,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "shopwecro.com": {
+      "domain": "shopwecro.com",
+      "google_ads_count": 119,
+      "capped": false,
+      "by_format": {
+        "image": 113,
+        "video": 4,
+        "text": 2,
+        "other": 0
+      },
+      "shopping_ads": 113,
+      "video_ads": 4,
+      "text_ads": 2,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "belroshop.com": {
+      "domain": "belroshop.com",
+      "google_ads_count": 100,
+      "capped": false,
+      "by_format": {
+        "image": 70,
+        "video": 19,
+        "text": 11,
+        "other": 0
+      },
+      "shopping_ads": 70,
+      "video_ads": 19,
+      "text_ads": 11,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "tendoradelight.com": {
+      "domain": "tendoradelight.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:08Z",
+      "error": null
+    },
+    "shopisadora.com": {
+      "domain": "shopisadora.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:08Z",
+      "error": null
+    },
+    "shop-rosemary.com": {
+      "domain": "shop-rosemary.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:08Z",
+      "error": null
+    },
+    "zoolase.com": {
+      "domain": "zoolase.com",
+      "google_ads_count": 38,
+      "capped": false,
+      "by_format": {
+        "image": 27,
+        "video": 6,
+        "text": 5,
+        "other": 0
+      },
+      "shopping_ads": 27,
+      "video_ads": 6,
+      "text_ads": 5,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:08Z",
+      "error": null
+    },
+    "evaberrynewyork.com": {
+      "domain": "evaberrynewyork.com",
+      "google_ads_count": 1,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 1,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 1,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:08Z",
+      "error": null
+    },
+    "gearelevation.com": {
+      "domain": "gearelevation.com",
+      "google_ads_count": 147,
+      "capped": false,
+      "by_format": {
+        "image": 94,
+        "video": 27,
+        "text": 26,
+        "other": 0
+      },
+      "shopping_ads": 94,
+      "video_ads": 27,
+      "text_ads": 26,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "jervisfamily.com": {
+      "domain": "jervisfamily.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:09Z",
+      "error": null
+    },
+    "doladelight.com": {
+      "domain": "doladelight.com",
+      "google_ads_count": 0,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": null,
+      "checked_at": "2026-06-27T08:49:09Z",
+      "error": null
+    },
+    "marnetic.com": {
+      "domain": "marnetic.com",
+      "google_ads_count": 27,
+      "capped": false,
+      "by_format": {
+        "image": 17,
+        "video": 5,
+        "text": 5,
+        "other": 0
+      },
+      "shopping_ads": 17,
+      "video_ads": 5,
+      "text_ads": 5,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:09Z",
+      "error": null
+    },
+    "clarendale.co": {
+      "domain": "clarendale.co",
+      "google_ads_count": 2,
+      "capped": false,
+      "by_format": {
+        "image": 0,
+        "video": 0,
+        "text": 2,
+        "other": 0
+      },
+      "shopping_ads": 0,
+      "video_ads": 0,
+      "text_ads": 2,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:09Z",
+      "error": null
+    },
+    "whimsyard.com": {
+      "domain": "whimsyard.com",
+      "google_ads_count": 200,
+      "capped": true,
+      "by_format": {
+        "image": 18,
+        "video": 157,
+        "text": 25,
+        "other": 0
+      },
+      "shopping_ads": 18,
+      "video_ads": 157,
+      "text_ads": 25,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:04Z",
+      "error": null
+    },
+    "peonlyshop.com": {
+      "domain": "peonlyshop.com",
+      "google_ads_count": 200,
+      "capped": true,
+      "by_format": {
+        "image": 28,
+        "video": 126,
+        "text": 46,
+        "other": 0
+      },
+      "shopping_ads": 28,
+      "video_ads": 126,
+      "text_ads": 46,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:05Z",
+      "error": null
+    },
+    "easepicks.com": {
+      "domain": "easepicks.com",
+      "google_ads_count": 200,
+      "capped": true,
+      "by_format": {
+        "image": 21,
+        "video": 157,
+        "text": 22,
+        "other": 0
+      },
+      "shopping_ads": 21,
+      "video_ads": 157,
+      "text_ads": 22,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:09Z",
+      "error": null
+    },
+    "peachloft.com": {
+      "domain": "peachloft.com",
+      "google_ads_count": 200,
+      "capped": true,
+      "by_format": {
+        "image": 1,
+        "video": 199,
+        "text": 0,
+        "other": 0
+      },
+      "shopping_ads": 1,
+      "video_ads": 199,
+      "text_ads": 0,
+      "other_ads": 0,
+      "last_shown": "2026-06-27",
+      "checked_at": "2026-06-27T08:49:09Z",
+      "error": null
+    }
+  }
+}

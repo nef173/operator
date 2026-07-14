@@ -1,0 +1,6 @@
+# Tracked competitor stores for the Competitor Best-Seller Spy (one domain per line).
+# EMPTY in this fresh copy — grow it with /competitor-shopping-scan, which auto-adds
+# US Google-Shopping-tagged stores that run PLAs on your target keywords.
+#
+# Lines starting with # are ignored. Add one competitor domain per line, e.g.:
+#   examplestore.com

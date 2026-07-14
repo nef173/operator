@@ -1,0 +1,10 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+# Postgres (Neon) for the live deploy — only imported when DATABASE_URL is set,
+# so local SQLite development needs nothing installed from these two lines.
+psycopg[binary]==3.2.3
+psycopg-pool==3.2.4
+xlrd==2.0.1
+# Drives the Bright Data Scraping Browser over CDP (connect_over_cdp to the REMOTE BD browser — no
+# local Chromium download needed) for the Google Sponsored-PLA capture (paid_shopping_scan_bd.py).
+playwright==1.49.1

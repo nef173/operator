@@ -1,0 +1,374 @@
+{
+  "_note": "TrendTrack shop traffic enrichment, keyed by domain. Refreshed by running search_shops (match_mode=exact) per store via the TrendTrack MCP and pasting fields here. history = monthly visits Dec2025..May2026. us_share = topCountries US fraction (0 if US not in topCountries). EVERY tracked store in stores.txt must have an entry here \u2014 enrich on every add. Updated 2026-06-18.",
+  "updated": "2026-06-18",
+  "stores": {
+    "belroshop.com": {
+      "monthly_visits": 1625547,
+      "us_share": 0.99,
+      "created": "2024-03",
+      "category": "Beauty & Fitness",
+      "products": 4577,
+      "active_meta_ads": 0,
+      "history": [
+        0,
+        0,
+        145359,
+        1173204,
+        1175825,
+        1625547
+      ]
+    },
+    "whimsyard.com": {
+      "monthly_visits": 202340,
+      "us_share": 0.91,
+      "created": "2024-04",
+      "category": "Business & Industrial",
+      "products": 2633,
+      "active_meta_ads": 0,
+      "history": [
+        162544,
+        165456,
+        158142,
+        326112,
+        224821,
+        202340
+      ]
+    },
+    "shopwecro.com": {
+      "monthly_visits": 348543,
+      "us_share": 0.0,
+      "created": "2022-10",
+      "category": "Computers & Electronics",
+      "products": 2368,
+      "active_meta_ads": 0,
+      "history": [
+        0,
+        0,
+        889,
+        185374,
+        240798,
+        348543
+      ]
+    },
+    "gearelevation.com": {
+      "monthly_visits": 92676,
+      "us_share": 0.8,
+      "created": "2020-09",
+      "category": "Apparel",
+      "products": 7860,
+      "active_meta_ads": 1,
+      "history": [
+        372575,
+        224551,
+        131793,
+        124338,
+        114641,
+        92676
+      ]
+    },
+    "ozerty-usa.com": {
+      "monthly_visits": 51764,
+      "us_share": 1.0,
+      "created": "2021-11",
+      "category": "Apparel",
+      "products": 2087,
+      "active_meta_ads": 0,
+      "history": [
+        86968,
+        53584,
+        107347,
+        70651,
+        46945,
+        51764
+      ]
+    },
+    "shogue.com": {
+      "monthly_visits": 155528,
+      "us_share": 0.75,
+      "created": "2025-03",
+      "category": "Business & Industrial",
+      "products": 4677,
+      "active_meta_ads": 2,
+      "history": [
+        149285,
+        37835,
+        138763,
+        218124,
+        175028,
+        155528
+      ]
+    },
+    "arvilaro.com": {
+      "monthly_visits": 1286863,
+      "us_share": 0.99,
+      "created": "2025-02",
+      "category": "Beauty & Fitness",
+      "products": 6988,
+      "active_meta_ads": 0,
+      "history": [
+        705788,
+        1144606,
+        1092402,
+        1096067,
+        1089819,
+        1286863
+      ]
+    },
+    "feanatic.com": {
+      "monthly_visits": 281262,
+      "us_share": 0.98,
+      "created": "2024-10",
+      "category": "Computers & Electronics",
+      "products": 3128,
+      "active_meta_ads": 0,
+      "history": [
+        36014,
+        23772,
+        41091,
+        92533,
+        152234,
+        281262
+      ]
+    },
+    "rowgins.com": {
+      "monthly_visits": 268721,
+      "us_share": 0.97,
+      "created": "2021-04",
+      "category": "Gifts & Special Event Items",
+      "products": 5272,
+      "active_meta_ads": 0,
+      "history": [
+        515545,
+        208013,
+        220503,
+        306905,
+        163493,
+        268721
+      ]
+    },
+    "luvilea.com": {
+      "monthly_visits": 941674,
+      "us_share": 0.98,
+      "created": "2025-06",
+      "category": "Beauty & Fitness",
+      "products": 13014,
+      "active_meta_ads": 0,
+      "history": [
+        276538,
+        425815,
+        542213,
+        666827,
+        861543,
+        941674
+      ]
+    },
+    "peonlyshop.com": {
+      "monthly_visits": 762051,
+      "us_share": 0.9,
+      "created": "2021-05",
+      "category": "Apparel",
+      "products": 3709,
+      "active_meta_ads": 0,
+      "history": [
+        1968360,
+        1577291,
+        1099319,
+        1387956,
+        652454,
+        762051
+      ]
+    },
+    "shop-odessa.co": {
+      "monthly_visits": 405606,
+      "us_share": 0.66,
+      "created": "2025-08",
+      "category": "Beauty & Fitness",
+      "products": 536,
+      "active_meta_ads": 0,
+      "history": [
+        220160,
+        389113,
+        341592,
+        295197,
+        211062,
+        405606
+      ]
+    },
+    "tendoradelight.com": {
+      "monthly_visits": 201702,
+      "us_share": 1.0,
+      "created": "2025-05",
+      "category": "Beauty & Fitness",
+      "products": 3284,
+      "active_meta_ads": 0,
+      "history": [
+        56583,
+        81190,
+        84554,
+        118730,
+        166804,
+        201702
+      ]
+    },
+    "shopisadora.com": {
+      "monthly_visits": 178137,
+      "us_share": 1,
+      "created": "2025-07",
+      "category": "Beauty & Fitness",
+      "products": 579,
+      "active_meta_ads": 0,
+      "history": [
+        72329,
+        164288,
+        152289,
+        127134,
+        99388,
+        178137
+      ]
+    },
+    "shop-rosemary.com": {
+      "monthly_visits": 95432,
+      "us_share": 1,
+      "created": "2025-08",
+      "category": "Apparel",
+      "products": 521,
+      "active_meta_ads": 0,
+      "history": [
+        0,
+        0,
+        0,
+        138496,
+        91294,
+        95432
+      ]
+    },
+    "evaberrynewyork.com": {
+      "monthly_visits": 240821,
+      "us_share": 1,
+      "created": "2025-03",
+      "category": "Apparel",
+      "products": 500,
+      "active_meta_ads": 0,
+      "history": [
+        226848,
+        442225,
+        332313,
+        237192,
+        261115,
+        240821
+      ]
+    },
+    "zoolase.com": {
+      "monthly_visits": 69710,
+      "us_share": 1,
+      "created": "2024-11",
+      "category": "Computers & Electronics",
+      "products": 5237,
+      "active_meta_ads": 0,
+      "history": [
+        36369,
+        38980,
+        45145,
+        51058,
+        61886,
+        69710
+      ]
+    },
+    "jervisfamily.com": {
+      "monthly_visits": 407427,
+      "us_share": 0.75,
+      "created": "2024-05",
+      "category": "Computers & Electronics",
+      "products": 994,
+      "active_meta_ads": 0,
+      "history": [
+        16554,
+        33220,
+        338913,
+        730460,
+        413118,
+        407427
+      ]
+    },
+    "doladelight.com": {
+      "monthly_visits": 136444,
+      "us_share": 0.95,
+      "created": "2025-05",
+      "category": "Beauty & Fitness",
+      "products": 3591,
+      "active_meta_ads": 0,
+      "history": [
+        96213,
+        274347,
+        257552,
+        175779,
+        148511,
+        136444
+      ]
+    },
+    "easepicks.com": {
+      "monthly_visits": 433950,
+      "us_share": 0.69,
+      "created": "2024-05",
+      "category": "Home & Garden",
+      "products": 2310,
+      "active_meta_ads": 0,
+      "history": [
+        502005,
+        241624,
+        403281,
+        327590,
+        312033,
+        433950
+      ]
+    },
+    "marnetic.com": {
+      "monthly_visits": 612008,
+      "us_share": 0.7,
+      "created": "2022-10",
+      "category": "Home & Garden",
+      "products": 7196,
+      "active_meta_ads": 0,
+      "history": [
+        738110,
+        1272765,
+        1044336,
+        849096,
+        727661,
+        612008
+      ]
+    },
+    "peachloft.com": {
+      "monthly_visits": 689843,
+      "us_share": 1,
+      "created": "2022-06",
+      "category": "Home & Garden",
+      "products": 3329,
+      "active_meta_ads": 0,
+      "history": [
+        2551821,
+        2448961,
+        2680843,
+        2260493,
+        916128,
+        689843
+      ]
+    },
+    "clarendale.co": {
+      "monthly_visits": 388556,
+      "us_share": 0.71,
+      "created": "2025-04",
+      "category": "Gifts & Special Event Items",
+      "products": 1513,
+      "active_meta_ads": 0,
+      "history": [
+        144104,
+        338314,
+        375861,
+        378106,
+        536108,
+        388556
+      ]
+    }
+  }
+}

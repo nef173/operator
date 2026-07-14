@@ -1,0 +1,10 @@
+# pytrends 4.9.x calls urllib3.Retry with the deprecated `method_whitelist` kwarg
+# (removed in urllib3 v2). Pin urllib3 < 2 until pytrends ships the fix.
+pytrends>=4.9.0
+requests>=2.31.0
+urllib3<2.0
+matplotlib>=3.8.0
+python-dotenv>=1.0.0
+# paid_shopping_scan.py drives the AdsPower browser over CDP (connect_over_cdp).
+# No `playwright install` needed — we attach to AdsPower's Chrome, not a bundled one.
+playwright>=1.40.0
