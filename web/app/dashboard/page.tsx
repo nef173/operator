@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { useApi } from "@/lib/useApi";
 import { OPERATOR_APPS, BACKEND_APPS, BACKEND_GROUPS, type OperatorApp } from "@/lib/apps";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useEmbedded } from "@/lib/embed";
 
 // The Operation-System home screen — "the view before" the apps, redesigned to match the
 // NN Operations launcher design language: a centered hero ("Hello — choose what you want to
@@ -70,6 +71,14 @@ const RANGES: { value: string; label: string }[] = [
 ];
 
 export default function DashboardPage() {
+  // Embedded in NN, there is no operator landing — NN's launcher opens each app directly.
+  // If anything ever routes here inside the frame, bounce to the app's own home.
+  const embedded = useEmbedded();
+  const embedRouter = useRouter();
+  useEffect(() => {
+    if (embedded) embedRouter.replace("/home");
+  }, [embedded, embedRouter]);
+
   const { data, error } = useApi(() => api.shell());
   // Per-app access (RBAC): any app the user isn't granted is hidden; a `rep` also loses the
   // P&L KPI strip.
@@ -103,6 +112,8 @@ export default function DashboardPage() {
       ? (healthStores.find((s) => s.store === storeKey)?.[win] ?? null)
       : (health.data.windowTotals?.[win] ?? health.data.totals)
     : null;
+
+  if (embedded) return null;
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-[var(--bg)]">

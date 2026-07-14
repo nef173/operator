@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { BackToShellLink } from "@/components/BackToShellLink";
 import { WorkerStrip } from "@/components/WorkerStrip";
 
 // Chrome for OPERATION-LEVEL views (Settings, Activity Log). These span the whole
@@ -12,12 +12,7 @@ export default function OperationLayout({
     <div className="flex h-screen flex-col overflow-hidden">
       <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-[var(--border)] bg-[var(--surface)] px-6">
         <div className="flex items-center gap-4">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-2 rounded-lg border border-[var(--border)] px-3 py-1.5 text-xs font-medium hover:bg-[var(--surface-2)]"
-          >
-            <span aria-hidden>←</span> Dashboard
-          </Link>
+          <BackToShellLink />
           <WorkerStrip />
         </div>
       </header>

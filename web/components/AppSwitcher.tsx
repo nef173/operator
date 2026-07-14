@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { OPERATOR_APPS, BACKEND_APPS, type OperatorApp } from "@/lib/apps";
+import { useEmbedded } from "@/lib/embed";
 
 // Fast app navigator — a popover off the sidebar logo. It mirrors the Operation-System
 // shell IN MINIATURE: the operation has two faces (Frontend = the build apps; Backend =
@@ -48,6 +49,7 @@ export function AppSwitcher({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const embedded = useEmbedded();
   const [open, setOpen] = useState(false);
   const [face, setFace] = useState<Face>("frontend");
   const ref = useRef<HTMLDivElement>(null);
@@ -92,6 +94,23 @@ export function AppSwitcher({
   function go(href: string) {
     setOpen(false);
     router.push(href);
+  }
+
+  // Embedded in the NN dashboard: NN owns the cross-app navigation, so the switcher collapses
+  // to a plain, non-interactive brand header — no popover, no "Operation System" menu, no way
+  // back into the operator's standalone shell.
+  if (embedded) {
+    return (
+      <div className="flex items-center gap-2.5 px-3 pb-4 pt-4">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--accent)] text-[var(--accent-fg)] text-sm font-bold">
+          {logo}
+        </div>
+        <div className="leading-tight">
+          <div className="text-[15px] font-semibold">{title}</div>
+          <div className="text-xs text-[var(--muted)]">{subtitle}</div>
+        </div>
+      </div>
+    );
   }
 
   return (
