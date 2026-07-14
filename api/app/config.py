@@ -61,8 +61,11 @@ def repo_root() -> Path:
     env = os.environ.get("GOOGLE_STORES_ROOT")
     if env:
         return Path(env).expanduser().resolve()
-    # operator-app/api/app/config.py -> parents[3] == project root
-    return Path(__file__).resolve().parents[3]
+    # Locally the layout is operator-app/api/app/config.py (parents[3] == root); in the
+    # Railway container it is /app/app/config.py (shallower), so clamp to the deepest
+    # available parent instead of IndexError-ing and crashing the app at startup.
+    parents = Path(__file__).resolve().parents
+    return parents[3] if len(parents) > 3 else parents[1]
 
 
 @lru_cache(maxsize=1)

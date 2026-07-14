@@ -10,6 +10,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# Code root inside the image (the step scripts are copied under /app). Pinning it means
+# config.repo_root() returns immediately instead of walking parent dirs.
+ENV GOOGLE_STORES_ROOT=/app
+
 # Install deps first so this layer caches until requirements change.
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
