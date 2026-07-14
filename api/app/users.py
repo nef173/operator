@@ -367,6 +367,20 @@ def public_by_id(pid: str) -> dict | None:
     return None
 
 
+def default_owner_id() -> str | None:
+    """The uid a trusted pass-through (NN one-login) should sign in AS. Prefers the current
+    active user when they're an owner, else the first owner on file, else the seeded owner —
+    so a renamed/re-provisioned owner still resolves without hard-coding the seed uid."""
+    people = _state()["people"]
+    act = (active_user() or {}).get("id")
+    if act and is_owner(act):
+        return act
+    for p in people:
+        if any(r == "owner" for r in (p.get("access") or {}).values()):
+            return p["id"]
+    return people[0]["id"] if people else None
+
+
 def bootstrap_owner_from_env() -> str | None:
     """Provision the real owner login from deployment env vars, so a live deploy (Railway)
     can be given the operator's OWN credentials WITHOUT ever putting a password in the repo.

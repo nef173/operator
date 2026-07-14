@@ -22,8 +22,28 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
   const [phase, setPhase] = useState<Phase>("loading");
   const [user, setUser] = useState<AuthUser | null>(null);
 
+  // One-login pass-through: the NN shell embeds us with a signed token in the URL hash
+  // (#sso=<exp>.<sig>). Exchange it for a bearer ONCE, then scrub it from the URL so it
+  // isn't left in history. A stored bearer already covers repeat loads; this only fires on
+  // the first entry from the shell (or after the 30-day session lapses).
+  async function consumeSso() {
+    if (typeof window === "undefined") return;
+    const m = window.location.hash.match(/(?:^#|&)sso=([^&]+)/);
+    if (!m) return;
+    const tok = decodeURIComponent(m[1]);
+    // Scrub the hash regardless of outcome so the token never lingers in the address bar.
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+    try {
+      const res = await api.authSso(tok);
+      setToken(res.token);
+    } catch {
+      /* fall through to the normal gate (status check / password form) */
+    }
+  }
+
   async function refresh() {
     try {
+      await consumeSso();
       const s = await api.authStatus();
       if (s.authenticated && s.user) {
         setUser(s.user);

@@ -2631,6 +2631,8 @@ export const api = {
   authStatus: () => get<AuthStatus>("/api/auth/status"),
   authLogin: (name: string, password: string) =>
     post<AuthResult>("/api/auth/login", { name, password }),
+  // One-login pass-through: exchange a signed token from the NN shell for a bearer.
+  authSso: (token: string) => post<AuthResult>("/api/auth/sso", { token }),
   authLogout: () => post<{ ok: boolean }>("/api/auth/logout"),
   authMe: () => get<{ user: AuthUser }>("/api/auth/me"),
   access: () => get<Access>("/api/access"),

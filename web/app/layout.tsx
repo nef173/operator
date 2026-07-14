@@ -12,8 +12,8 @@ const geistSans = Inter({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Google Stores — Operator",
-  description: "Live overview and control for the Google Stores pipeline.",
+  title: "Operator — NN Operations",
+  description: "Research, list, and optimize — the NN Operations product pipeline.",
 };
 
 // Root layout is the Operation-System chassis only — it owns <html>/<body>, theme

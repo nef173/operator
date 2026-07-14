@@ -578,6 +578,25 @@ def auth_login(body: dict = Body(...)) -> dict:
     return result
 
 
+@app.post("/api/auth/sso")
+def auth_sso(body: dict = Body(default={})) -> dict:
+    """One-login pass-through from the NN shell. NN signs a short-lived token with the shared
+    OPERATOR_SSO_SECRET and hands it to the embedded frame; we verify it and mint an owner
+    bearer, so the operator never sees a second sign-in. Disabled (404) when no secret is set,
+    so a standalone deploy keeps its normal password login."""
+    if not auth.sso_enabled():
+        raise HTTPException(status_code=404, detail="pass-through sign-in not enabled")
+    token = (body.get("token") or "").strip()
+    if not auth.verify_sso(token):
+        raise HTTPException(status_code=401, detail="invalid or expired sign-in token")
+    uid = users.default_owner_id()
+    result = uid and auth.mint(uid)
+    if not result:
+        raise HTTPException(status_code=500, detail="no owner account to sign in")
+    runlog.record(None, "auth", uid, "done", detail="signed in via NN pass-through")
+    return result
+
+
 @app.post("/api/auth/logout")
 def auth_logout(authorization: str | None = Header(default=None)) -> dict:
     auth.logout(auth.token_from_header(authorization))

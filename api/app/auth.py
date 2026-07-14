@@ -18,6 +18,8 @@ sign-in always works, and owners create/rename everyone else from inside the app
 from __future__ import annotations
 
 import hashlib
+import hmac
+import os
 import secrets
 import time
 
@@ -51,21 +53,65 @@ def _prune(sessions: dict) -> dict:
     return live
 
 
-def login(name: str, password: str) -> dict | None:
-    """Return {token, user} on success, else None (caller emits a generic 401)."""
-    person = users.authenticate(name, password)
+def mint(uid: str) -> dict | None:
+    """Issue a bearer session for an already-trusted uid (no password). Shared by password
+    login and the NN pass-through below. Returns {token, user} or None if uid is unknown."""
+    person = users.public_by_id(uid)
     if not person:
         return None
     token = secrets.token_urlsafe(32)
     now = time.time()
     sessions = _prune(_load())
-    sessions[_token_hash(token)] = {"uid": person["id"], "created": now, "exp": now + _TTL_SECONDS}
+    sessions[_token_hash(token)] = {"uid": uid, "created": now, "exp": now + _TTL_SECONDS}
     _save(sessions)
     try:
-        users.set_active(person["id"])
+        users.set_active(uid)
     except KeyError:
         pass
     return {"token": token, "user": person}
+
+
+def login(name: str, password: str) -> dict | None:
+    """Return {token, user} on success, else None (caller emits a generic 401)."""
+    person = users.authenticate(name, password)
+    if not person:
+        return None
+    return mint(person["id"])
+
+
+# ── One-login pass-through from the NN shell ────────────────────────────────────────
+# The whole app is embedded (iframe) behind NN's own login, so a SECOND sign-in here is
+# pure friction. NN signs a short-lived token with a secret it shares ONLY with this API
+# (OPERATOR_SSO_SECRET, never shipped to the browser) and hands it to the frame in the URL
+# hash; we verify it and mint an owner bearer. The public API stays locked — a bearer is
+# only ever minted for a caller that already holds the shared secret (i.e. the NN server).
+_SSO_MAX_SKEW = 600  # a presented token may claim at most 10 min of life (forgery-window cap)
+
+
+def _sso_secret() -> str:
+    return (os.environ.get("OPERATOR_SSO_SECRET") or "").strip()
+
+
+def sso_enabled() -> bool:
+    return bool(_sso_secret())
+
+
+def verify_sso(token: str | None) -> bool:
+    """token = '<exp>.<hexsig>' where hexsig = HMAC-SHA256(secret, str(exp)). Valid when the
+    signature matches (constant-time) AND exp is in the future but not absurdly far ahead."""
+    secret = _sso_secret()
+    if not secret or not token or "." not in token:
+        return False
+    exp_str, _, sig = token.partition(".")
+    try:
+        exp = int(exp_str)
+    except ValueError:
+        return False
+    expected = hmac.new(secret.encode(), exp_str.encode(), hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(expected, sig.strip()):
+        return False
+    now = time.time()
+    return now <= exp <= now + _SSO_MAX_SKEW
 
 
 def resolve(token: str | None) -> dict | None:
