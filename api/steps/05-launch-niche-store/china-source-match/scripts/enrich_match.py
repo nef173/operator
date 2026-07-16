@@ -69,17 +69,15 @@ def main() -> int:
     token = tmapi_token()
     touched = 0
     for r in rows:
-        best = r.get("best")
+        # match_china.py writes the chosen offer under "matched" (confident) or "closest"
+        # (near-miss fallback) — NOT "best". Reading "best" made this a silent no-op.
+        best = r.get("matched") or r.get("closest")
         if not isinstance(best, dict) or not best.get("offer_id"):
             continue
         if args.offer and str(best.get("offer_id")) != str(args.offer):
             continue
-        before = bool(best.get("variants") or best.get("specs"))
         enrich(best, token)  # in-place: adds variants/specs/images/sold/stock/price_*
-        after = bool(best.get("variants") or best.get("specs"))
-        if after and not before:
-            touched += 1
-        elif after:
+        if best.get("variants") or best.get("specs"):
             touched += 1
         print(f"enriched offer {best.get('offer_id')}: "
               f"{len(best.get('variants') or [])} variant groups, "

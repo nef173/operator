@@ -117,7 +117,10 @@ def build_variants(sku: dict, location_gid: str, stock: int) -> list[dict]:
     out = []
     for v in sku["variants"]:
         size = v["size"]
-        sku_code = f"DCM-{sku['slug'].upper()}-{size.split('(')[0].strip().replace(' ', '').replace('-', '')[:10]}"
+        # SKU = <product-slug>-<size>. The slug is unique per product, so this is
+        # unique and category-correct. (Was hardcoded "DCM-" = dog-cooling-mat, which
+        # mislabeled every other category and risked cross-category SKU collisions.)
+        sku_code = f"{sku['slug'].upper()}-{size.split('(')[0].strip().replace(' ', '').replace('-', '')[:10]}"
         out.append({
             "optionValues": [{"optionName": "Size", "name": size}],
             "price": v["price"],

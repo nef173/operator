@@ -29,7 +29,6 @@ ACTION = "store-data-sync"
 # (part-name, function) — pulls only; nothing here writes to Shopify. LEAN build: only the store
 # PROFILE is synced (currency / shop name / markets). The finance / orders / variants / issues /
 # optimization pulls belonged to the ops sub-apps that this build does not carry.
-_PARTS = ("profile",)
 
 
 def _pulls(store: str) -> list[tuple[str, dict]]:

@@ -156,7 +156,14 @@ def build_index(store: str) -> dict:
     cursor = None
     while True:
         data = shop.gql(_CATALOG_Q, {"cursor": cursor})
-        block = (data.get("data") or {}).get("products") or {}
+        # Fail LOUD on a non-throttle query error. Silently returning a partial index
+        # makes existing products look "NEW" to the dedup gate → duplicate listings —
+        # exactly what this scan exists to prevent.
+        if data.get("errors"):
+            raise RuntimeError(f"catalog query error (refusing to build a truncated index): {data['errors']}")
+        block = (data.get("data") or {}).get("products")
+        if block is None:
+            raise RuntimeError("catalog query returned no products block — refusing to build a truncated index")
         for edge in block.get("edges", []):
             n = edge["node"]
             price_obj = ((n.get("priceRangeV2") or {}).get("minVariantPrice") or {})

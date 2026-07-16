@@ -11,7 +11,6 @@ import re
 
 import json
 import os
-import secrets
 import threading
 from contextlib import asynccontextmanager
 
@@ -631,9 +630,23 @@ def users_list() -> dict:
     }
 
 
+def _require_owner(authorization: str | None) -> dict:
+    """Gate for owner-only endpoints (user admin + stored credentials). The web sends the
+    session bearer via authHeaders(); NN SSO / login mints it. Without this these endpoints
+    were reachable UNAUTHENTICATED on the public API host — anyone could create an owner or
+    read/overwrite stored API credentials."""
+    requester = auth.resolve(auth.token_from_header(authorization))
+    if not requester:
+        raise HTTPException(status_code=401, detail="not signed in")
+    if not users.is_owner(requester["id"]):
+        raise HTTPException(status_code=403, detail="owners only")
+    return requester
+
+
 @app.post("/api/users")
-def users_create(body: dict = Body(...)) -> dict:
+def users_create(body: dict = Body(...), authorization: str | None = Header(default=None)) -> dict:
     """Invite a person — name (required) + password + per-app access map (role per app)."""
+    _require_owner(authorization)
     try:
         person = users.create_person(
             name=body.get("name") or "",
@@ -649,8 +662,9 @@ def users_create(body: dict = Body(...)) -> dict:
 
 
 @app.put("/api/users/{pid}")
-def users_update(pid: str, body: dict = Body(...)) -> dict:
+def users_update(pid: str, body: dict = Body(...), authorization: str | None = Header(default=None)) -> dict:
     """Edit a person. Password blank = keep existing. `photo` only changes when the key is present."""
+    _require_owner(authorization)
     try:
         person = users.update_person(
             pid,
@@ -688,8 +702,9 @@ def users_reveal_password(pid: str, authorization: str | None = Header(default=N
 
 
 @app.delete("/api/users/{pid}")
-def users_delete(pid: str) -> dict:
+def users_delete(pid: str, authorization: str | None = Header(default=None)) -> dict:
     """Remove a person's access."""
+    _require_owner(authorization)
     if not users.delete_person(pid):
         raise HTTPException(status_code=404, detail="person not found")
     runlog.record(None, "users", pid, "done", detail="removed access")
@@ -2038,16 +2053,18 @@ def _connections_view() -> dict:
 
 
 @app.get("/api/connections")
-def connections_get() -> dict:
+def connections_get(authorization: str | None = Header(default=None)) -> dict:
     """Masked view of every credential the app holds — per-store Shopify + global API keys.
     Secrets are NEVER returned raw; each field reports `configured` + a `••••last4` preview."""
+    _require_owner(authorization)
     return _connections_view()
 
 
 @app.put("/api/connections")
-def connections_put(body: dict = Body(...)) -> dict:
+def connections_put(body: dict = Body(...), authorization: str | None = Header(default=None)) -> dict:
     """Set credentials. Only the fields supplied are written (others keep their value);
     sending an empty string for a field clears it. Returns the fresh masked view."""
+    _require_owner(authorization)
     connections.update(body)  # fires the always-auto-sync for any store whose creds changed
     runlog.record(None, "connections", "update", "done", detail="updated credentials")
     return _connections_view()

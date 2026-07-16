@@ -64,6 +64,10 @@ def main():
         node = shop.product(h)
         if not node:
             print(f"  ✗ {h}: not found"); continue
+        # Safety: only purge DRAFT products (the promise in this script's docstring).
+        # Never delete media on ACTIVE/ARCHIVED products — those are live listings.
+        if node.get("status") != "DRAFT":
+            print(f"  ⊘ {h}: SKIPPED — status {node.get('status')} (DRAFT only)"); continue
         ids = [m["id"] for m in node["media"]["nodes"]]
         if not ids:
             print(f"  - {h}: already 0 media (status {node['status']})"); continue
