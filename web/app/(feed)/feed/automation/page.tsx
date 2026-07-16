@@ -88,6 +88,7 @@ export default function AutomationPage() {
   async function applyMatch(m: import("@/lib/api").AutomationMatch) {
     if (!m.product_id) return;
     setApplying(`${m.rule_id}:${m.product_id}:${m.market}`);
+    setErr(null);
     try {
       await api.automationApply(store, {
         product_id: m.product_id, action: m.action, rule_name: m.rule_name,
@@ -95,6 +96,10 @@ export default function AutomationPage() {
       });
       evalApi.reload();
       logApi.reload();
+    } catch (e) {
+      // Surface the failure instead of swallowing it (was an unhandled rejection
+      // with no feedback — the operator couldn't tell an apply had failed).
+      setErr(e instanceof Error ? e.message : String(e));
     } finally {
       setApplying(null);
     }

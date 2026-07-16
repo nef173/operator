@@ -16,6 +16,7 @@ import { useApi } from "@/lib/useApi";
 import { Card, Stat, StateBadge, Pill } from "@/components/ui";
 import { PageHeader, Loading, ErrorState, Empty } from "@/components/PageState";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 function money(n: number | null) {
   return n == null ? "—" : `$${n.toFixed(2)}`;
@@ -336,7 +337,7 @@ function SkuCard({
                 <div className="mb-1 text-[11px] uppercase text-[var(--muted)]">Body HTML</div>
                 <div
                   className="prose-sm max-w-none rounded-lg bg-[var(--surface-2)] p-4 text-sm leading-relaxed [&_strong]:font-semibold [&_p]:mb-2"
-                  dangerouslySetInnerHTML={{ __html: s.body_html }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(s.body_html) }}
                 />
               </div>
             ) : null}
