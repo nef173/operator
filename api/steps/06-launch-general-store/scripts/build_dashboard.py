@@ -333,6 +333,11 @@ def main():
         print("no snapshots found", file=sys.stderr)
         return 1
     data = json.dumps({"stores": stores, "movers": movers}, ensure_ascii=False)
+    # Escape sequences that could break out of the <script> block (a competitor
+    # title containing "</script>" would otherwise inject arbitrary HTML/JS).
+    # < etc. stay valid JSON and parse back to the original characters.
+    data = (data.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+                .replace(" ", "\\u2028").replace(" ", "\\u2029"))
     html = HTML.replace("__DATA__", data)
     with open(args.out, "w") as f:
         f.write(html)

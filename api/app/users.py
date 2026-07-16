@@ -352,11 +352,14 @@ def reveal_password(pid: str) -> str | None:
 
 
 def is_owner(uid: str) -> bool:
-    """True if this person holds the Owner role on at least one app — the gate for viewing
-    other people's passwords."""
+    """True only for a FULL owner — someone holding the Owner role on EVERY app. This gates
+    viewing other people's passwords, so it must not be satisfied by a single-app owner
+    (e.g. a Tasks-only owner), who would otherwise be able to reveal every other person's
+    password including the master owner's."""
     for p in _state()["people"]:
         if p["id"] == uid:
-            return any(r == "owner" for r in (p.get("access") or {}).values())
+            access = p.get("access") or {}
+            return bool(APP_IDS) and all(access.get(a) == "owner" for a in APP_IDS)
     return False
 
 

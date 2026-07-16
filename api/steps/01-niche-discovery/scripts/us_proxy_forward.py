@@ -3,10 +3,16 @@
 proxy, injecting Proxy-Authorization. Lets Chrome use --proxy-server=http://127.0.0.1:8888
 so manual browsing + CDP both work through the US IP without Chrome handling proxy auth.
 """
-import socket, threading, base64, select, sys
+import os, socket, threading, base64, select, sys
 
-UP_HOST, UP_PORT = "89.42.86.163", 12323
-UP_USER, UP_PASS = "14adedd3c347b", "250b12af0b"
+# Upstream proxy comes from env — NEVER hardcode live credentials in source (they
+# leak into git history forever). Set US_PROXY_HOST/PORT/USER/PASS before running.
+UP_HOST = os.environ.get("US_PROXY_HOST", "")
+UP_PORT = int(os.environ.get("US_PROXY_PORT", "0") or "0")
+UP_USER = os.environ.get("US_PROXY_USER", "")
+UP_PASS = os.environ.get("US_PROXY_PASS", "")
+if not (UP_HOST and UP_PORT and UP_USER and UP_PASS):
+    sys.exit("Set US_PROXY_HOST / US_PROXY_PORT / US_PROXY_USER / US_PROXY_PASS in the environment.")
 AUTH = b"Proxy-Authorization: Basic " + base64.b64encode(f"{UP_USER}:{UP_PASS}".encode()) + b"\r\n"
 LISTEN = ("127.0.0.1", 8888)
 

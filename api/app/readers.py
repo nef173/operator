@@ -456,7 +456,17 @@ def remove_store(key: str) -> str:
     setting are cleared separately by the caller. No-op-safe: raises FileNotFoundError if the
     store key isn't registered."""
     slug = (key or "").strip().lower()
-    store_dir = config.general_stores_dir() / slug
+    # Validate BEFORE building the path — same slug rule as add_store(). Without
+    # this, a key like ".." (or backslash segments on Windows) escapes the stores
+    # root and shutil.rmtree() would recursively delete an arbitrary directory
+    # (e.g. the whole data root). Path traversal on a destructive op.
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,39}", slug):
+        raise ValueError("store key must be lowercase letters/digits/hyphens, start alphanumeric, ≤40 chars")
+    base = config.general_stores_dir()
+    store_dir = base / slug
+    # Defense in depth: the resolved target must be a direct child of the stores root.
+    if store_dir.resolve().parent != base.resolve():
+        raise ValueError("invalid store key")
     if not store_dir.is_dir():
         raise FileNotFoundError(f"store '{slug}' not found")
     shutil.rmtree(store_dir)
