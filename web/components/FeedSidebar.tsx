@@ -94,8 +94,8 @@ export function FeedSidebar() {
       {/* Logo opens the fast app navigator (Frontend/Backend + each app). */}
       <AppSwitcher
         logo={ICONS.feed}
-        title="Product Feed"
-        subtitle="& Optimization"
+        title="Product Feed Management"
+        subtitle=""
         activeAppId="product-feed"
       />
 

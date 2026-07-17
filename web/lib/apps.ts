@@ -65,7 +65,7 @@ export const ALL_APPS: OperatorApp[] = [
   },
   {
     id: "product-feed",
-    name: "Product Feed & Optimization",
+    name: "Product Feed Management",
     tagline:
       "GMC feed-readiness for the catalog — title / category / image / SEO checks and proposed title rewrites.",
     href: "/feed/optimize",

@@ -107,7 +107,7 @@ export function AppSwitcher({
         </div>
         <div className="leading-tight">
           <div className="text-[15px] font-semibold">{title}</div>
-          <div className="text-xs text-[var(--muted)]">{subtitle}</div>
+          {subtitle ? <div className="text-xs text-[var(--muted)]">{subtitle}</div> : null}
         </div>
       </div>
     );
@@ -141,7 +141,7 @@ export function AppSwitcher({
         </div>
         <div className="leading-tight">
           <div className="text-[15px] font-semibold">{title}</div>
-          <div className="text-xs text-[var(--muted)]">{subtitle}</div>
+          {subtitle ? <div className="text-xs text-[var(--muted)]">{subtitle}</div> : null}
         </div>
         <svg
           className={`ml-auto text-[var(--muted)] transition-transform ${open ? "rotate-180" : ""}`}
