@@ -29,6 +29,13 @@ async def lifespan(_app: FastAPI):
     reaped = runlog.reap_orphan_jobs()
     if reaped:
         print(f"[startup] reaped {reaped} orphaned job(s) from a prior process")
+    # Mirror NN Master Settings stores on boot so the operator knows NN's stores
+    # immediately (subsequent adds are picked up lazily by /api/stores).
+    try:
+        added = readers.sync_nn_stores(force=True)
+        print(f"[startup] NN store sync: {added} new store(s) registered")
+    except Exception as exc:  # noqa: BLE001 — never block boot on the sync
+        print(f"[startup] NN store sync skipped: {exc}")
     # A restart (deploy) is not a real failure — resume the auto-local work it interrupted and
     # clear the rest, so the operator never sees a wall of 'orphaned by restart' cards. Runs
     # unconditionally so it also sweeps up orphans left by EARLIER restarts. Best-effort.
@@ -147,6 +154,12 @@ def overview() -> dict:
 
 @app.get("/api/stores")
 def stores() -> dict:
+    # Pull any newly-added NN Master Settings stores before listing (throttled,
+    # best-effort) so the picker reflects NN without a manual add here.
+    try:
+        readers.sync_nn_stores()
+    except Exception:
+        pass
     return {"stores": [readers.store_summary(s) for s in readers.list_stores()]}
 
 

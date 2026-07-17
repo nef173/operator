@@ -17,10 +17,13 @@ from __future__ import annotations
 
 import functools
 import json
+import os
 import re
 import shutil
 import threading
+import time
 import urllib.parse
+import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -381,6 +384,49 @@ def list_stores() -> list[str]:
         p.name for p in base.iterdir()
         if p.is_dir() and (p / "listing-queue.json").exists()
     )
+
+
+_nn_sync_last = 0.0
+
+def sync_nn_stores(force: bool = False) -> int:
+    """Mirror NN Master Settings stores into the operator registry so a store
+    added in NN's dashboard appears here automatically — same as every other NN
+    app. Best-effort: if NN_BASE_URL / OPERATOR_SSO_SECRET aren't set, or NN is
+    unreachable, it's a silent no-op (never breaks the store list). Throttled to
+    once per 60s. Returns the count of newly-registered stores."""
+    global _nn_sync_last
+    base = (os.environ.get("NN_BASE_URL") or "").strip().rstrip("/")
+    secret = (os.environ.get("OPERATOR_SSO_SECRET") or "").strip()
+    if not base or not secret:
+        return 0
+    now = time.time()
+    if not force and (now - _nn_sync_last) < 60:
+        return 0
+    _nn_sync_last = now
+    try:
+        req = urllib.request.Request(
+            f"{base}/api/operator/stores", headers={"x-operator-key": secret}
+        )
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except Exception as exc:
+        print(f"[nn-sync] fetch failed: {exc}")
+        return 0
+    added = 0
+    for s in (data.get("stores") or []):
+        key = str((s or {}).get("key") or "").strip().lower()
+        if not key:
+            continue
+        if (config.general_stores_dir() / key / "listing-queue.json").exists():
+            continue
+        try:
+            add_store(key)
+            added += 1
+        except Exception:
+            pass  # bad slug or race with another request — skip, keep going
+    if added:
+        print(f"[nn-sync] registered {added} new store(s) from NN Master Settings")
+    return added
 
 
 # Store modes: which catalog PATH a store runs. `general` is the default (the broad
