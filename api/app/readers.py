@@ -407,20 +407,25 @@ def sync_nn_stores(force: bool = False) -> int:
         req = urllib.request.Request(
             f"{base}/api/operator/stores", headers={"x-operator-key": secret}
         )
-        with urllib.request.urlopen(req, timeout=6) as resp:
+        with urllib.request.urlopen(req, timeout=15) as resp:
             data = json.loads(resp.read().decode("utf-8"))
     except Exception as exc:
         print(f"[nn-sync] fetch failed: {exc}")
         return 0
     added = 0
     for s in (data.get("stores") or []):
-        key = str((s or {}).get("key") or "").strip().lower()
-        if not key:
+        # Register under a readable slug from the NN NAME (e.g. "Ellese & Co."
+        # -> "ellese-co"), not the opaque NN key ("yhbakm1w"), so the picker
+        # reads like every other app. Falls back to the key if the name is empty.
+        name = str((s or {}).get("name") or "").strip()
+        key = str((s or {}).get("key") or "").strip()
+        slug = re.sub(r"[^a-z0-9]+", "-", (name or key).lower()).strip("-")[:40].strip("-")
+        if not slug:
             continue
-        if (config.general_stores_dir() / key / "listing-queue.json").exists():
+        if (config.general_stores_dir() / slug / "listing-queue.json").exists():
             continue
         try:
-            add_store(key)
+            add_store(slug)
             added += 1
         except Exception:
             pass  # bad slug or race with another request — skip, keep going
